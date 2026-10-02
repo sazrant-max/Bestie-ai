@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Bestie AI • Leaderboard</title><link rel=stylesheet href=styles.css></head><body>
+<header><div class=brand>♥ Bestie <span>AI</span></div><nav><a href=index.html>Home</a><a href=brain.html>Brain Boost</a><a href=leaderboard.html>Leaderboard</a><a href=admin.html>Owner</a></nav></header>
+<main class=panel><small>LEADERBOARD</small><h1>Brain Boost Rankings</h1><p>See the highest XP totals among Bestie AI members.</p><div id=list><p class=notice>Loading…</p></div></main>
+<footer>Bestie AI • Learn • Challenge • Grow</footer>
+<script type=module>
+import{createClient}from'https://esm.sh/@supabase/supabase-js@2';
+const sb=createClient(BESTIE_CONFIG.SUPABASE_URL,BESTIE_CONFIG.SUPABASE_ANON_KEY);
+const el=document.getElementById('list');
+const{data,error}=await sb.from('profiles').select('display_name,xp,streak').order('xp',{ascending:false}).limit(25);
+if(error){el.textContent='Leaderboard unavailable.'}else{
+el.innerHTML=data.map((u,i)=>`<div class="row"><b>#${i+1} ${esc(u.display_name||'Bestie')}</b><span>${u.xp} XP • ${u.streak} 🔥</span></div>`).join('')||'<p class=notice>No players yet.</p>';
+}
+function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+</script></body></html>

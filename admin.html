@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Bestie AI Owner</title><link rel=stylesheet href=styles.css></head><body>
+<header><div class=brand>♥ Bestie <span>AI</span></div><nav><a href=index.html>Website</a></nav></header>
+<main class=panel>
+<section id=login><small>SECURE OWNER ACCESS</small><h1>Owner Login</h1><p>Only an authorized owner account can open this dashboard.</p><input id=email type=email placeholder="Owner email"><input id=password type=password placeholder="Password"><button class=btn id=loginBtn>Sign in</button><p id=msg></p></section>
+<section id=dashboard hidden><div class=topline><div><small>OWNER CONTROL CENTER</small><h1>Welcome, Sazrant.</h1></div><button class=secondary id=logout>Sign out</button></div>
+<div class=stats><div><small>Role</small><b>OWNER</b></div><div><small>Challenges</small><b id=count>0</b></div><div><small>Access</small><b>Full</b></div></div>
+<h2>Challenge Library</h2><p class="notice">Owner controls are protected by the owner role and database RLS.</p><div id=list></div>
+<h2>Add Challenge</h2><div class=formgrid><input id=title placeholder="Title"><input id=category placeholder="Category"><input id=question placeholder="Question"><input id=answer placeholder="Answer"><input id=xp type=number value=50 placeholder="XP"></div><button class=btn id=add>Add challenge</button><p id=addmsg></p>
+</section></main><script src=config.js></script><script type=module src=admin.js></script></body></html>

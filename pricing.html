@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Bestie AI Premium</title><link rel=stylesheet href=styles.css></head><body>
+<header><div class=brand>♥ Bestie <span>AI</span></div><nav><a href=index.html>Home</a><a href=ai.html>Texting</a><a href=brain.html>Brain Boost</a><a href=pricing.html>Premium</a></nav></header>
+<main class="panel pricing"><small>BESTIE AI PREMIUM</small><h1>Better chats. Brighter minds.</h1><p>Try Premium free for <b>3 days</b>, then <b>US$5/month</b>.</p>
+<div class="pricecard"><div class="price">$5<span>/month</span></div><ul><li>AI Texting Helper</li><li>AI Brain Boost</li><li>XP, streaks and achievements</li><li>New premium features as released</li></ul><button class=btn id=startTrial>Start 3-day free trial</button><p id=msg class=notice></p></div>
+<p class=notice>Automatic billing will begin after the trial only after a real payment provider checkout is connected. Cancel before the trial ends to avoid the first charge.</p></main>
+<footer>Bestie AI • Better Chats • Brighter Minds</footer>
+<script type=module>
+import{createClient}from'https://esm.sh/@supabase/supabase-js@2';
+const sb=createClient(BESTIE_CONFIG.SUPABASE_URL,BESTIE_CONFIG.SUPABASE_ANON_KEY);
+startTrial.onclick=async()=>{
+ msg.textContent='Opening secure checkout…';
+ const {data:{session}}=await sb.auth.getSession();
+ if(!session){msg.textContent='Please sign in first.';return;}
+ const {data,error}=await sb.functions.invoke('create-checkout');
+ if(error||!data?.url){msg.textContent='Checkout is not configured yet.';return;}
+ location.href=data.url;
+};
+</script></body></html>

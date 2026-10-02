@@ -1,0 +1,22 @@
+BESTIE AI V9 — PAYMENT SETUP
+
+Price: US$5/month
+Trial: 3 days
+
+Use Stripe Checkout in subscription mode.
+
+Supabase Edge Function secrets:
+STRIPE_SECRET_KEY = your Stripe secret key
+STRIPE_PRICE_ID = the recurring US$5/month Stripe Price ID
+SITE_URL = your deployed Netlify URL
+STRIPE_WEBHOOK_SECRET = your Stripe webhook signing secret
+SUPABASE_SERVICE_ROLE_KEY = your Supabase service-role key (server-side only)
+
+IMPORTANT:
+- Never put Stripe secret keys or the Supabase service-role key in config.js or frontend JavaScript.
+- Create the $5/month recurring Price in Stripe.
+- Create a webhook endpoint pointing to:
+  https://YOUR_PROJECT.supabase.co/functions/v1/stripe-webhook
+- Subscribe to checkout/subscription lifecycle events.
+- The included webhook intentionally refuses unverified events. Signature verification must be completed before production billing is enabled.
+- Test the complete flow in Stripe test mode first.
